@@ -7,19 +7,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.li.bean.Student;
+import cn.li.service.IStudentCheckService;
+import cn.li.service.StudentCheckServiceImpl;
+
 /**
  * Servlet implementation class UserRegister
  */
-@WebServlet(description = "ユーザー情報登録ページ", urlPatterns = { "/userRegister" })
+@WebServlet("/userRegister")
 public class UserRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		response.getWriter().print("ユーザー情報登録ページ");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String studentNum = request.getParameter("studentnum");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		IStudentCheckService stuCheckService = new StudentCheckServiceImpl();
+		
+		Student student = stuCheckService.checkStudentByNum(studentNum);
+		if(student == null) {
+			System.out.println(studentNum+" "+username+" "+password);
+		}
+		
 	}
 
 }
