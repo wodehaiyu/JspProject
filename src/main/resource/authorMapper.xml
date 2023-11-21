@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cn.li.mapper.AuthorMapper">
+	<insert id="authorRegister">
+		insert into author 
+			(user_num,username,mobile,email) 
+		value 
+			(#{userNum},#{username},#{mobile},#{email});
+	</insert>
+	<update id="authorInfoAdd">
+		update author 
+		set
+			address=#{address},
+			id_card=#{idCard},
+			bank_card=#{bankCard},
+			bank=#{bank}
+		where 
+			author.user_num = #{userNum};
+	</update>
+	<update id="authorDelete">
+		update author 
+		set
+			del_flg = '1' 
+		where 
+			author.user_num = #{userNum};
+	</update>
+	<select id="searchOneByUserNum" resultType="cn.li.bean.Author">
+		select 
+			user_num as userNum,
+			username,
+			mobile,
+			email,
+			address,
+			id_card as idCard,
+			bank,
+			bank_card as bankCard 
+		from author where author.user_num = #{userNum};
+	</select>
+	<select id="searchAll" resultType="cn.li.bean.Author">
+		select 
+			user_num as userNum,
+			username,
+			mobile,
+			email,
+			address,
+			id_card as idCard,
+			bank,
+			bank_card as bankCard 
+		from author;
+	</select>
+</mapper>
