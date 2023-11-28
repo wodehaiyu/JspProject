@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.li.bean.Author;
-import cn.li.utils.MakeTestDate;
 import cn.li.utils.MybatisUtils;
 
 public class AuthorMapperTest {
@@ -65,11 +64,6 @@ public class AuthorMapperTest {
 		List<Author> authors = sqlSession.selectList("searchAll");
 		System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(authors));
 		sqlSession.close();
-	}
-
-	@Test
-	public void testMakeTestDate() {
-		new MakeTestDate().createUsername();
 	}
 
 }
